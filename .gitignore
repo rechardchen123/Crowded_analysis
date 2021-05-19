@@ -127,3 +127,26 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+#ignore some big data file
+video/
+output/
+.idea/
+model_data/
+camera_calibrate/calibration_image/
+camera_calibrate/video_for_calibrate/
+camera_calibrate/frame/
+img/
+
+
+
+
+
+
+
+
+
+
+
+
