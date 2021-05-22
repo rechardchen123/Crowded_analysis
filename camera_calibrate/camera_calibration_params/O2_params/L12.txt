@@ -1,0 +1,16 @@
+FocalLengthX = 233.621663208811
+FocalLengthY = 76.8862589911439
+PrincipalPointX = 1110.37298074342
+PrincipalPointY = -140.627597875706
+Skew = 0.00000000000000000000
+DistortionK1 = -0.00112852601464239
+DistortionK2 = 3.65379079673057e-05
+DistortionP1 = 0
+DistortionP2 = 0
+Rotation matrix
+    -0.8835    0.3635    0.2955
+    0.4067    0.9082    0.0990
+   -0.2324    0.2076   -0.9502
+
+translation matrix
+-553.444896747179	1173.00296731762	218.236910215249

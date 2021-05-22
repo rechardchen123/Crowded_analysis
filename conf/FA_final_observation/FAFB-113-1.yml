@@ -3,15 +3,15 @@ image_parameters:
   img_path: ./img/static_frame_from_video.jpg
   p1:
   - 640
-  - 219
+  - 465
   p2:
-  - 133
-  - 427
+  - 11
+  - 247
   p3:
-  - 390
-  - 109
+  - 657
+  - 193
   p4:
-  - 73
-  - 154
+  - 192
+  - 99
   size_frame: '856'
   width_og: 480

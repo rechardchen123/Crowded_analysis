@@ -48,7 +48,7 @@ def area(x1, x2, x3, x4):
 
 if __name__ == '__main__':
     # load the Homography matrix for the coordinate transformation
-    Homography_matrix = np.loadtxt("./camera_calibrate/cam2world_coordinate/CA-108.txt",
+    Homography_matrix = np.loadtxt("./camera_calibrate/cam2world_coordinate/Carbao_cup_coordinate_cam2world/CH-248.txt",
                                    dtype=np.float32, delimiter=' ')
     print(Homography_matrix)
     print("Done: [ Homograhy matrix loaded]...")
@@ -63,20 +63,20 @@ if __name__ == '__main__':
     # data.insert(data.shape[1], 'y world (new)', world_y)
     # data.to_csv('./output/test.csv', index=False)
 
-    p1_x = 753
-    p1_y = 153
+    p1_x = 370
+    p1_y = 63
     p1_x1, p1_y1 = img_coord_to_world_coord(p1_x, p1_y, Homography_matrix)
     print(p1_x1, p1_y1)
-    p2_x = 273
-    p2_y = 422
+    p2_x = 666
+    p2_y = 167
     p2_x1, p2_y1 = img_coord_to_world_coord(p2_x, p2_y, Homography_matrix)
     print(p2_x1, p2_y1)
-    p3_x = 520
-    p3_y = 58
+    p3_x = 96
+    p3_y = 118
     p3_x1, p3_y1 = img_coord_to_world_coord(p3_x, p3_y, Homography_matrix)
     print(p3_x1, p3_y1)
-    p4_x = 88
-    p4_y = 201
+    p4_x = 325
+    p4_y = 456
     p4_x1, p4_y1 = img_coord_to_world_coord(p4_x, p4_y, Homography_matrix)
     print(p4_x1, p4_y1)
 

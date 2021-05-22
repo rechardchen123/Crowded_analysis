@@ -12,10 +12,10 @@ import cv2
 
 def projection_matrices():
     # intrinsic matrix
-    F_X = 486.818614555058
-    F_Y = 4590.53252676304
-    C_X = 482.335848824659
-    C_Y =  292.248243192006
+    F_X =   233.621663208811
+    F_Y =  76.8862589911439
+    C_X =  1110.37298074342
+    C_Y =-140.627597875706
     intrinsic_matrix = np.array([
         [F_X, 0, C_X],
         [0, F_Y, C_Y],
@@ -24,10 +24,10 @@ def projection_matrices():
 
     # extrinsic matrix
     rotation_matrix = np.array([
-        [-0.9960 ,  -0.0054  , -0.0891],
-        [-0.0884  , -0.0756   , 0.9932],
-        [ -0.0121 ,   0.9971   , 0.0748]])
-    translation = np.array([[-27.1341942666204], [-10.0826316111059], [673.387773352816]])
+        [  -0.8835   , 0.3635   , 0.2955],
+        [   0.4067  ,  0.9082  ,  0.0990],
+        [  -0.2324   , 0.2076  , -0.9502]])
+    translation = np.array([[-553.444896747179], [ 1173.00296731762], [218.236910215249]])
     extrinsic_matrix = np.concatenate((rotation_matrix, translation), axis=1)
     return intrinsic_matrix, extrinsic_matrix
 

@@ -43,7 +43,7 @@ MPP = 0.014
 
 
 def save_data_into_file(frame_no, time, track_id, centerX, centerY, actual_centerX, actual_centerY,
-                        current_count, counter, density):
+                        current_count, counter):
     """
     save the file to csv
     :param frame_no: current frame number
@@ -66,8 +66,7 @@ def save_data_into_file(frame_no, time, track_id, centerX, centerY, actual_cente
                  'X coord (real world)': actual_centerX,
                  'Y coord (real world)': actual_centerY,
                  'current_count': current_count,
-                 'total count': counter,
-                 'density': density}
+                 'total count': counter}
     data = pd.DataFrame(save_dict)
     # output file
     data.to_csv("./output/" + args["input"] + ".csv", index=False)
@@ -322,11 +321,11 @@ def main(yolo, corner_points, H):
 
                 # current frame density of the selected area
                 # actual_area = (x_range * MPP) * (y_range * MPP)
-                actual_area = 21.38
-                den = i / (actual_area)
-                print("Actual area:{:.2f} and density is:{:.3f}".format(actual_area, den))
-                den = round(den, 3)
-                density.append(den)
+                # actual_area = 21.38
+                # den = i / (actual_area)
+                # print("Actual area:{:.2f} and density is:{:.3f}".format(actual_area, den))
+                # den = round(den, 3)
+                # density.append(den)
 
                 # social distancing calculation
                 # for k in range(0, len(indexIDs) - 1):
@@ -345,8 +344,8 @@ def main(yolo, corner_points, H):
         # Draw the green rectangle to ROI zone
         observed_points = corner_points
         draw_rectangle(frame, observed_points)
-        cv2.imshow('wembley_level1', frame)
-        cv2.namedWindow("Wembley_level1", 0)
+        # cv2.imshow('wembley_level1', frame)
+        # cv2.namedWindow("Wembley_level1", 0)
 
         if writeVideo_flag:
             # save a frame
@@ -372,7 +371,7 @@ def main(yolo, corner_points, H):
     #       len(centerY_w), len(current_count), len(counter), len(density))
 
     save_data_into_file(current_frame, time_stamp, indexIDs, centerX, centerY, centerX_w, centerY_w,
-                        current_count, counter, density)
+                        current_count, counter)
 
     # save_speed_and_distance(delta_Dis, speed)
 

@@ -12,7 +12,7 @@ import os
 '''
 transfer the video to images
 '''
-video_handle = cv2.VideoCapture('./video_for_calibrate/248.mp4')
+video_handle = cv2.VideoCapture('./video_for_calibrate/O2_calibration/O2-L12.mp4')
 fps = int(round(video_handle.get(cv2.CAP_PROP_FPS)))
 print(fps)
 frame_no = 0
