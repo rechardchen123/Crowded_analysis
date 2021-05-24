@@ -12,10 +12,10 @@ import cv2
 
 def projection_matrices():
     # intrinsic matrix
-    F_X =   233.621663208811
-    F_Y =  76.8862589911439
-    C_X =  1110.37298074342
-    C_Y =-140.627597875706
+    F_X = 233.621663208811
+    F_Y = 76.8862589911439
+    C_X = 1110.37298074342
+    C_Y = -140.627597875706
     intrinsic_matrix = np.array([
         [F_X, 0, C_X],
         [0, F_Y, C_Y],
@@ -24,10 +24,10 @@ def projection_matrices():
 
     # extrinsic matrix
     rotation_matrix = np.array([
-        [  -0.8835   , 0.3635   , 0.2955],
-        [   0.4067  ,  0.9082  ,  0.0990],
-        [  -0.2324   , 0.2076  , -0.9502]])
-    translation = np.array([[-553.444896747179], [ 1173.00296731762], [218.236910215249]])
+        [-0.8835, 0.3635, 0.2955],
+        [0.4067, 0.9082, 0.0990],
+        [-0.2324, 0.2076, -0.9502]])
+    translation = np.array([[-553.444896747179], [1173.00296731762], [218.236910215249]])
     extrinsic_matrix = np.concatenate((rotation_matrix, translation), axis=1)
     return intrinsic_matrix, extrinsic_matrix
 
@@ -83,37 +83,5 @@ def save_transformation_matrix():
 
 
 if __name__ == "__main__":
-    F_X = 893.2599
-    F_Y = 2837.4
-    C_X = 307.3224
-    C_Y = 212.5938
-
-    intrinsic_matrix = np.array([
-        [F_X, 0, C_X],
-        [0, F_Y, C_Y],
-        [0, 0, 1]])
-
-    rotation_matrix = np.array([
-        [-0.9133, 0.1161, -0.3903],
-        [-0.4008, -0.0870, 0.9120],
-        [0.0719, 0.9894, 0.1260]])
-
-    translation = np.array([[360.7214], [21.0471], [670.0632]])
-
-    imagePoint = [259, 257, 1]
-    zConst = 0
-    # calculate the scale factor
-    tempMat = np.linalg.inv(rotation_matrix) * np.linalg.inv(intrinsic_matrix) * imagePoint
-    tempMat2 = np.linalg.inv(rotation_matrix) * translation
-    print(tempMat)
-    print(tempMat2)
-    s = zConst + tempMat2[2, 0]
-    s /= tempMat[2, 0]
-    print("scale factor is: ", s)
-
-    # camera to world transformation
-    c2w = np.linalg.inv(rotation_matrix) * (np.linalg.inv(intrinsic_matrix) * s * imagePoint - translation)
-    print('camera to world: ', c2w)
-
     # convert_background()
     save_transformation_matrix()

@@ -1,17 +1,17 @@
 image_parameters:
-  height_og: 864
+  height_og: 856
   img_path: ./img/static_frame_from_video.jpg
   p1:
-  - 385
-  - 77
+  - 430
+  - 454
   p2:
-  - 663
-  - 199
+  - 194
+  - 192
   p3:
-  - 143
-  - 142
+  - 657
+  - 199
   p4:
-  - 429
-  - 455
-  size_frame: '864'
-  width_og: 484
+  - 424
+  - 105
+  size_frame: '856'
+  width_og: 480

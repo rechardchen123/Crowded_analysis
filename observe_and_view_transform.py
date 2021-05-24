@@ -32,7 +32,7 @@ def CallBackFunc(event, x, y, flags, param):
 video_name = input("Enter the exact name of the video (including .mp4 or else): ")
 size_frame = input("Prompt the size of the image you want to get : ")
 
-vs = cv2.VideoCapture("./video/O2/level12/" + video_name)
+vs = cv2.VideoCapture("./video/Carbao_Cup_Final/" + video_name)
 # Loop until the end of the video stream
 while True:
     # Load the frame and test if it has reache the end of the video

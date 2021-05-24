@@ -8,6 +8,7 @@ COLOR_BLUE = (255, 0, 0)
 BIG_CIRCLE = 60
 SMALL_CIRCLE = 3
 
+
 def draw_rectangle(frame, corner_points):
     # Draw rectangle box over the ROI area
     """
@@ -34,8 +35,6 @@ def draw_rectangle(frame, corner_points):
                 COLOR_RED, 1)
 
 
-
-
 if __name__ == '__main__':
     with open("./conf/config_birdview.yml", "r") as ymlfile:
         cfg = yaml.load(ymlfile)
@@ -60,4 +59,3 @@ if __name__ == '__main__':
         draw_rectangle(frame, corner_points)
         cv2.imwrite("./img/FA_H-108.jpg", frame)
         break
-

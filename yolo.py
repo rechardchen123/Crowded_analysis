@@ -25,34 +25,36 @@ from PIL import Image, ImageFont, ImageDraw
 from yolo3.model import yolo_eval
 from yolo3.utils import letterbox_image
 import argparse
+
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--input",help="path to input video", default = "./test_video/det_t1_video_00315_test.avi")
-ap.add_argument("-c", "--class",help="name of class", default = "person")
+ap.add_argument("-i", "--input", help="path to input video", default="./test_video/det_t1_video_00315_test.avi")
+ap.add_argument("-c", "--class", help="name of class", default="person")
 args = vars(ap.parse_args())
+
 
 class YOLO(object):
     def __init__(self):
         self.model_path = './model_data/yolo.h5'
         self.anchors_path = 'model_data/yolo_anchors.txt'
         self.classes_path = 'model_data/coco_classes.txt'
-        #具体参数可实验后进行调整
+        # 具体参数可实验后进行调整
         if args["class"] == 'person':
-           self.score = 0.6 #0.8
-           self.iou = 0.6
-           self.model_image_size = (416,416)
+            self.score = 0.6  # 0.8
+            self.iou = 0.6
+            self.model_image_size = (416, 416)
         if args["class"] == 'car':
-           self.score = 0.6
-           self.iou = 0.6
-           self.model_image_size = (416, 416)
+            self.score = 0.6
+            self.iou = 0.6
+            self.model_image_size = (416, 416)
         if args["class"] == 'bicycle' or args["class"] == 'motorcycle':
-           self.score = 0.6
-           self.iou = 0.6
-           self.model_image_size = (416, 416)
-        
+            self.score = 0.6
+            self.iou = 0.6
+            self.model_image_size = (416, 416)
+
         self.class_names = self._get_class()
         self.anchors = self._get_anchors()
         self.sess = K.get_session()
-        #self.model_image_size = (416, 416) # fixed size or (None, None) small targets:(320,320) mid targets:(960,960)
+        # self.model_image_size = (416, 416) # fixed size or (None, None) small targets:(320,320) mid targets:(960,960)
         self.is_fixed_size = self.model_image_size != (None, None)
         self.boxes, self.scores, self.classes = self.generate()
 
@@ -61,7 +63,7 @@ class YOLO(object):
         with open(classes_path) as f:
             class_names = f.readlines()
         class_names = [c.strip() for c in class_names]
-        #print(class_names)
+        # print(class_names)
         return class_names
 
     def _get_anchors(self):
@@ -91,16 +93,16 @@ class YOLO(object):
         random.seed(None)  # Reset seed to default.
 
         # Generate output tensor targets for filtered bounding boxes.
-        self.input_image_shape = K.placeholder(shape=(2, ))
+        self.input_image_shape = K.placeholder(shape=(2,))
         boxes, scores, classes = yolo_eval(self.yolo_model.output, self.anchors,
-                len(self.class_names), self.input_image_shape,
-                score_threshold=self.score, iou_threshold=self.iou)
+                                           len(self.class_names), self.input_image_shape,
+                                           score_threshold=self.score, iou_threshold=self.iou)
         return boxes, scores, classes
 
     def detect_image(self, image):
         if self.is_fixed_size:
-            assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
-            assert self.model_image_size[1]%32 == 0, 'Multiples of 32 required'
+            assert self.model_image_size[0] % 32 == 0, 'Multiples of 32 required'
+            assert self.model_image_size[1] % 32 == 0, 'Multiples of 32 required'
             boxed_image = letterbox_image(image, tuple(reversed(self.model_image_size)))
         else:
             new_image_size = (image.width - (image.width % 32),
@@ -108,7 +110,7 @@ class YOLO(object):
             boxed_image = letterbox_image(image, new_image_size)
         image_data = np.array(boxed_image, dtype='float32')
 
-        #print(image_data.shape)
+        # print(image_data.shape)
         image_data /= 255.
         image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
 
@@ -124,38 +126,38 @@ class YOLO(object):
         person_counter = 0
         for i, c in reversed(list(enumerate(out_classes))):
             predicted_class = self.class_names[c]
-            #print(self.class_names[c])
+            # print(self.class_names[c])
             '''
             if predicted_class != 'person' and predicted_class != 'car':
                print(predicted_class)
                continue
             '''
             if predicted_class != args["class"]:
-               #print(predicted_class)
-               continue
+                # print(predicted_class)
+                continue
 
             person_counter += 1
-            #if  predicted_class != 'car':
-                #continue
-            #label = predicted_class
+            # if  predicted_class != 'car':
+            # continue
+            # label = predicted_class
             box = out_boxes[i]
-            #score = out_scores[i]
+            # score = out_scores[i]
             x = int(box[1])
             y = int(box[0])
-            w = int(box[3]-box[1])
-            h = int(box[2]-box[0])
-            if x < 0 :
+            w = int(box[3] - box[1])
+            h = int(box[2] - box[0])
+            if x < 0:
                 w = w + x
                 x = 0
-            if y < 0 :
+            if y < 0:
                 h = h + y
                 y = 0
-            return_boxs.append([x,y,w,h])
-            #print(return_boxs)
+            return_boxs.append([x, y, w, h])
+            # print(return_boxs)
             return_class_name.append([predicted_class])
-        #cv2.putText(image, str(self.class_names[c]),(int(box[0]), int(box[1] -50)),0, 5e-3 * 150, (0,255,0),2)
-        #print("Found person: ",person_counter)
-        return return_boxs,return_class_name
+        # cv2.putText(image, str(self.class_names[c]),(int(box[0]), int(box[1] -50)),0, 5e-3 * 150, (0,255,0),2)
+        # print("Found person: ",person_counter)
+        return return_boxs, return_class_name
 
     def close_session(self):
         self.sess.close()

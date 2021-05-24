@@ -1,7 +1,13 @@
-import pandas as pd
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*
+# ***********************************************
+# @Time  : 11/05/2021 01:50
+# @File  : calibrate_img.py
+# @email : xiang.chen.17@ucl.ac.uk
+# @author: Xiang Chen
+# ***********************************************
 import numpy as np
 import math
-from shapely.geometry import Polygon
 
 
 def img_coord_to_world_coord(x, y, H):
@@ -44,8 +50,6 @@ def area(x1, x2, x3, x4):
     return s
 
 
-
-
 if __name__ == '__main__':
     # load the Homography matrix for the coordinate transformation
     Homography_matrix = np.loadtxt("./camera_calibrate/cam2world_coordinate/Carbao_cup_coordinate_cam2world/CH-248.txt",
@@ -84,7 +88,6 @@ if __name__ == '__main__':
     # x2 = np.array([p2_x1, p2_y1])
     # x3 = np.array([p3_x1, p3_y1])
     # x4 = np.array([p4_x1, p4_y1])
-
 
     x1 = np.array([1.51, 0.57])
     x2 = np.array([-2.11, -2.45])

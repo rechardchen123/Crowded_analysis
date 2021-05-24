@@ -32,7 +32,7 @@ from keras.utils.vis_utils import plot_model as plot
 def unique_config_sections(config_file):
     """Convert all config sections to have unique names.
 
-    Adds unique suffixes to config sections for compability with configparser.
+    Adds unique suffixes to config sections for compatibility with configparser.
     """
     section_counters = defaultdict(int)
     output_stream = io.StringIO()

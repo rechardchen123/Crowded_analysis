@@ -33,14 +33,6 @@ COLOR_BLUE = (255, 0, 0)
 BIG_CIRCLE = 60
 SMALL_CIRCLE = 3
 
-# MPP
-# Carbao108:0.019
-# Carbao205:0.016
-# Carbao248:0.009
-# FA-108:0.016
-# FA-205:0.014
-MPP = 0.014
-
 
 def save_data_into_file(frame_no, time, track_id, centerX, centerY, actual_centerX, actual_centerY,
                         current_count, counter):
@@ -55,7 +47,7 @@ def save_data_into_file(frame_no, time, track_id, centerX, centerY, actual_cente
     :param actual_centerY: real world y coordination position (unit: meter)
     :param current_count: current frame total number of person
     :param counter: the whole number of people
-    :param densigy: the density in current frame
+    :param density: the density in current frame
     :return: the csv format data
     """
     save_dict = {'Frame_No': frame_no,
@@ -105,6 +97,13 @@ def compute_velocity(center1, center2, fps):
     :param fps: the FPS parameter
     :return: the movement speed
     """
+    # MPP
+    # Carbao108:0.019
+    # Carbao205:0.016
+    # Carbao248:0.009
+    # FA-108:0.016
+    # FA-205:0.014
+    MPP = 0.014
     d_pixels = math.sqrt(math.pow(center2[0] - center1[0], 2) + math.pow(center2[1] - center1[1], 2))
     d_meters = MPP * d_pixels
     speed = d_meters * fps * 3.6
