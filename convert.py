@@ -50,14 +50,14 @@ def unique_config_sections(config_file):
 
 # %%
 def main(args):
-    config_path = os.path.expanduser(args.config_path)
-    weights_path = os.path.expanduser(args.weights_path)
+    config_path = args.config_path
+    weights_path = args.weights_path
     assert config_path.endswith('.cfg'), '{} is not a .cfg file'.format(
         config_path)
     assert weights_path.endswith(
         '.weights'), '{} is not a .weights file'.format(weights_path)
 
-    output_path = os.path.expanduser(args.output_path)
+    output_path = args.output_path
     assert output_path.endswith(
         '.h5'), 'output path {} is not a .h5 file'.format(output_path)
     output_root = os.path.splitext(output_path)[0]
@@ -254,9 +254,12 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Darknet To Keras Converter.')
-    parser.add_argument('config_path', help='Path to Darknet cfg file.', default="./model_data/yolov3.cfg")
-    parser.add_argument('weights_path', help='Path to Darknet weights file.', default="./model_data/yolov3.weights")
-    parser.add_argument('output_path', help='Path to output Keras model file.', default="./model_data/yolo.h5")
+    parser.add_argument('--config_path', help='Path to Darknet cfg file.',
+                        default=r"C:\Users\ucesxc0\Desktop\Crowded_analysis-main\model_data\yolov3.cfg")
+    parser.add_argument('--weights_path', help='Path to Darknet weights file.',
+                        default=r"C:\Users\ucesxc0\Desktop\Crowded_analysis-main\model_data\yolov3.weights")
+    parser.add_argument('--output_path', help='Path to output Keras model file.',
+                        default=r"C:\Users\ucesxc0\Desktop\Crowded_analysis-main\model_data\yolo.h5")
     parser.add_argument(
         '-p',
         '--plot_model',
@@ -267,5 +270,6 @@ if __name__ == '__main__':
         '--weights_only',
         help='Save as Keras weights file instead of model file.',
         action='store_true')
-    args = vars(parser.parse_args())
+    args = parser.parse_args()
     main(args)
+
