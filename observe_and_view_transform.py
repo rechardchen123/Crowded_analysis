@@ -32,13 +32,13 @@ def CallBackFunc(event, x, y, flags, param):
 video_name = input("Enter the exact name of the video (including .mp4 or else): ")
 size_frame = input("Prompt the size of the image you want to get : ")
 
-vs = cv2.VideoCapture("./video/Carbao_Cup_Final/" + video_name)
+vs = cv2.VideoCapture("C://Users//ucesxc0//Desktop//Crowded_analysis-main//video//" + video_name)
 # Loop until the end of the video stream
 while True:
     # Load the frame and test if it has reache the end of the video
     (frame_exists, frame) = vs.read()
     frame = imutils.resize(frame, width=int(size_frame))
-    cv2.imwrite("./img/static_frame_from_video.jpg", frame)
+    cv2.imwrite(r"C:\Users\ucesxc0\Desktop\Crowded_analysis-main\img\static_frame_from_video.jpg", frame)
     break
 
 # Create a black image and a window
@@ -46,7 +46,7 @@ windowName = 'MouseCallback'
 cv2.namedWindow(windowName)
 
 # Load the image
-img_path = "./img/static_frame_from_video.jpg"
+img_path = r"C:\Users\ucesxc0\Desktop\Crowded_analysis-main\img\static_frame_from_video.jpg"
 img = cv2.imread(img_path)
 
 # Get the size of the image for the calibration
@@ -68,7 +68,7 @@ if __name__ == "__main__":
             M = cv2.getPerspectiveTransform(pts1, pts2)
             dst_img = cv2.warpPerspective(img, M, (width, height))
             cv2.imshow("Bird-eye view", dst_img)
-            cv2.imwrite("./img/bird_view.jpg", dst_img)
+            cv2.imwrite(r"C:\Users\ucesxc0\Desktop\Crowded_analysis-main\img\bird_view.jpg", dst_img)
             print('bird_view image transformation done!')
 
             # Return a dict to the YAML file
@@ -84,7 +84,7 @@ if __name__ == "__main__":
                     size_frame=size_frame,
                 ))
             # Write the result to the config file
-            with open('./conf/config_birdview.yml', 'w') as outfile:
+            with open(r'C:\Users\ucesxc0\Desktop\Crowded_analysis-main\conf\config_birdview.yml', 'w') as outfile:
                 yaml.dump(config_data, outfile, default_flow_style=False)
             break
         if cv2.waitKey(20) == 27:

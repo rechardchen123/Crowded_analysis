@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*
+# ***********************************************
+# @Time  : 06/05/2021 01:50
+# @File  : calibrate_img.py
+# @email : xiang.chen.17@ucl.ac.uk
+# @author: Xiang Chen
+# ***********************************************
 import yaml
 import cv2
 

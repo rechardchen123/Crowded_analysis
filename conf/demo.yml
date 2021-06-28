@@ -1,0 +1,17 @@
+image_parameters:
+  height_og: 856
+  img_path: C:\Users\ucesxc0\Desktop\Crowded_analysis-main\img\static_frame_from_video.jpg
+  p1:
+  - 442
+  - 471
+  p2:
+  - 181
+  - 236
+  p3:
+  - 842
+  - 210
+  p4:
+  - 514
+  - 84
+  size_frame: '856'
+  width_og: 480

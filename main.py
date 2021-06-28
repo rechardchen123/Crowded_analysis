@@ -61,7 +61,7 @@ def save_data_into_file(frame_no, time, track_id, centerX, centerY, actual_cente
                  'total count': counter}
     data = pd.DataFrame(save_dict)
     # output file
-    data.to_csv("./output/" + args["input"] + ".csv", index=False)
+    data.to_csv("C://Users//ucesxc0//Desktop//Crowded_analysis-main//output//demo.csv", index=False)
 
 
 def draw_rectangle(frame, corner_points):
@@ -160,14 +160,15 @@ def main(yolo, corner_points, H):
     nms_max_overlap = 0.3
 
     # deep_sort
-    model_filename = 'model_data/market1501.pb'
+    model_filename = 'C://Users//ucesxc0//Desktop//Crowded_analysis-main//model_data//market1501.pb'
     encoder = gdet.create_box_encoder(model_filename, batch_size=1)
 
     metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget)
     tracker = Tracker(metric)
 
     writeVideo_flag = True
-    video_capture = cv2.VideoCapture("./video/" + args["input"] + ".mp4")
+    video_capture = cv2.VideoCapture(
+        "C://Users//ucesxc0//Desktop//Crowded_analysis-main//video//demo.mp4")
     FPS = video_capture.get(5)  # get the video FPS
     total_frame = video_capture.get(7)  # total frame of input video
     print("video FPS is {}, and total frame is {}.".format(FPS, total_frame))
@@ -177,8 +178,10 @@ def main(yolo, corner_points, H):
         w = int(video_capture.get(3))
         h = int(video_capture.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        out = cv2.VideoWriter("./output/" + "detection_output_" + args["input"] + ".avi", fourcc, 15, (w, h))
-        list_file = open("./output/" + "detection_" + args["input"] + ".txt", 'w')
+        out = cv2.VideoWriter(
+            "C://Users//ucesxc0//Desktop//Crowded_analysis-main//output//demo.avi", fourcc, 15, (w, h))
+        list_file = open(
+            "C://Users//ucesxc0//Desktop//Crowded_analysis-main//output//detection_demo.txt", 'w')
         frame_index = 0
 
     fps = 0.0
@@ -343,8 +346,8 @@ def main(yolo, corner_points, H):
         # Draw the green rectangle to ROI zone
         observed_points = corner_points
         draw_rectangle(frame, observed_points)
-        # cv2.imshow('wembley_level1', frame)
-        # cv2.namedWindow("Wembley_level1", 0)
+        cv2.imshow('wembley_level1', frame)
+        cv2.namedWindow("Wembley_level1", 0)
 
         if writeVideo_flag:
             # save a frame
@@ -389,10 +392,11 @@ def main(yolo, corner_points, H):
 
 if __name__ == '__main__':
     backend.clear_session()
+    # set the parsers
     ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--input", help="path to input video", default="CA-108")
+    ap.add_argument("-i", "--input", help="path to input video", default="demo")
     ap.add_argument("-c", "--class", help="name of class", default="person")
-    args = vars(ap.parse_args())
+    args = ap.parse_args()
 
     pts = [deque(maxlen=30) for _ in range(9999)]
     warnings.filterwarnings('ignore')
@@ -404,7 +408,7 @@ if __name__ == '__main__':
 
     # load the ROI region for the top-down view
     print("[ Loading config file for the bird view transformation ] ")
-    with open("./conf/" + args["input"] + ".yml", "r") as ymlfile:
+    with open(r"C:\Users\ucesxc0\Desktop\Crowded_analysis-main\conf\demo.yml", "r") as ymlfile:
         cfg = yaml.load(ymlfile)
     width_og, height_og = 0, 0
     corner_points = []
@@ -420,8 +424,9 @@ if __name__ == '__main__':
     print("Done: [ Config file loaded]...")
 
     # load the Homography matrix for the coordinate transformation
-    Homography_matrix = np.loadtxt("./camera_calibrate/cam2world_coordinate/" + args["input"] + ".txt",
-                                   dtype=np.float32, delimiter=' ')
+    Homography_matrix = np.loadtxt(
+        r"C:\Users\ucesxc0\Desktop\Crowded_analysis-main\camera_calibrate\cam2world_coordinate\demo.txt",
+        dtype=np.float32, delimiter=' ')
     print(Homography_matrix)
     print("Done: [ Transformation matrix loaded]...")
     main(YOLO(), corner_points, Homography_matrix)

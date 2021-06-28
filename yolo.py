@@ -34,9 +34,9 @@ args = vars(ap.parse_args())
 
 class YOLO(object):
     def __init__(self):
-        self.model_path = './model_data/yolo.h5'
-        self.anchors_path = 'model_data/yolo_anchors.txt'
-        self.classes_path = 'model_data/coco_classes.txt'
+        self.model_path = 'C://Users//ucesxc0//Desktop//Crowded_analysis-main//model_data//yolo.h5'
+        self.anchors_path = 'C://Users//ucesxc0//Desktop//Crowded_analysis-main//model_data//yolo_anchors.txt'
+        self.classes_path = 'C://Users//ucesxc0//Desktop//Crowded_analysis-main//model_data//coco_classes.txt'
         # 具体参数可实验后进行调整
         if args["class"] == 'person':
             self.score = 0.6  # 0.8
