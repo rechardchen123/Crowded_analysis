@@ -210,7 +210,7 @@ After you clone the repository from the Github [link](https://github.com/rechard
 
 5. Select the Region of Interest (ROI) area for analysis: when I start to analyse these videos, the spectator which is in the corner of the images has a server distortion due to lack of depth information to use. In order to reduce the factor and increase the robustness of the algorithm, we choose a region which is in the centre of the image. The function `observe_and_view_transform.py` has conducted it and the output of the ROI is shown in figure:
 
-   ![image-20210624232425533](README.assets/image-20210624232425533.png)
+  
 
    We randomly choose four points to locate the ROI area. 
 
@@ -218,7 +218,7 @@ After you clone the repository from the Github [link](https://github.com/rechard
 
 7. The tracking in this programming is to track each person in each frame and get a stable moving routes for each spectator. The tracking is based on the paper called “Simple online and real-time tracking with a deep association metric” which is abbreviated into `Deep SORT`. The tracking algorithm currently is a hard problem for the image and video analysis area and the accuracy cannot reach a very high level. In our cases, we focus on the spectators, but sometimes, the spectator movement is not a rigid body movement model, it will has some deformation, which is quite different from the vehicle tracking. Therefore, we only realise around 90% accuracy. For some cases, such as two spectators walking side by side or one person blending down may lose the tracking. The tracking will get each person’s movement speed, movement speed and some necessary information, which is shown in the figure. The details of the calculating each person’s movement distance or speed will be explained detailly in the programming, please refer some of the coding. 
 
-   ![image-20210624234712949](README.assets/image-20210624234712949.png)
+ 
 
    Finally, the detection output also output these data:
 
